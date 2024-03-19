@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    ports:
+      - "3300:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=template
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass1234
+    volumes:
+      - mysql_data:/var/lib/mysql:rw
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpadmin
+    expose:
+      - 80
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=mysql
+    depends_on:
+      - mysql
+
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:latest
+    ports: 
+      - "8090:8080"
+      - "50000:50000"
+    networks:
+      - jenkins_network
+
+networks:
+  jenkins_network:
+    driver: bridge
