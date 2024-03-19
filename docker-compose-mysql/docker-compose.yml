@@ -12,7 +12,7 @@ services:
       - MYSQL_USER=user
       - MYSQL_PASSWORD=pass1234
     volumes:
-      - mysql_data:/var/lib/mysql:rw
+      - mysql_data:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -38,3 +38,7 @@ services:
 networks:
   jenkins_network:
     driver: bridge
+
+volumes:
+  mysql_data:
+    name: mysql_data
