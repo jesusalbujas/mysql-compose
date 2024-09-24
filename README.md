@@ -1,1 +1,1 @@
-# Compose génerico para MySQL
+# Generic compose for MySQL
